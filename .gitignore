@@ -6,6 +6,7 @@ xcode
 launch.json
 .vscode
 .idea
+opensfm.egg-info
 
 # Ignore generated files
 /build

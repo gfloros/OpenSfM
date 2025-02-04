@@ -11,6 +11,7 @@ from . import (
     export_bundler,
     export_colmap,
     export_geocoords,
+    export_onepose,
     export_openmvs,
     export_ply,
     export_pmvs,
@@ -51,4 +52,5 @@ opensfm_commands = [
     extend_reconstruction,
     create_submodels,
     align_submodels,
+    export_onepose,
 ]
