@@ -3,7 +3,7 @@ Here are the steps required in order to prepare a dataset for OnePose.
 1. Clone OpenSfM
 
 ```
-git clone -b onepose --single-branch https://github.com/gfloros/OpenSfM.git
+git clone -b onepose --single-branch https://github.com/gfloros/OpenSfM.git --recursive
 ```
 
 2. Create a folder inside the data folder and name it as you like.
