@@ -10,12 +10,10 @@ from opensfm.align import apply_similarity
 
 
 def run_dataset(data: DataSet) -> None:
-    """Export only the shots of the reconstruction to TUM format"""
-
+    """Export the reconstruction to OnePose format"""
     reconstructions = data.load_reconstruction()
     tracks_manager = data.load_tracks_manager()
     if not reconstructions:
-        logger.error("No reconstruction found")
         return
     for rcn in reconstructions:
         b = np.array([0.0, 0.0, 0.0])
@@ -23,13 +21,7 @@ def run_dataset(data: DataSet) -> None:
         apply_similarity(rcn, 1.0, A, b)
         A = np.array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, -1.0]])
         apply_similarity(rcn, 1.0, A, b)
-#         A = np.array([[0.95793355, 0.24588716, 0.14799603],
-                      # [-0.2637161, 0.95760679, 0.11594422],
-                      # [-0.11321281, -0.1500958, 0.98216807]])
-        # b = np.array([-0.30070689, -0.06991318, -0.61253707])
-        # s = 0.07680673517611407
-        # apply_similarity(rcn, s, A, b)
-        data.save_ply(rcn, tracks_manager)
+        data.save_ply(rcn, tracks_manager, no_cameras=True)
 
     frames_strs = []
     poses_strs = []
@@ -47,7 +39,7 @@ def run_dataset(data: DataSet) -> None:
         pos_str = ','.join([str(v) for v in pos])
         r = Rotation.from_matrix(shot.pose.get_R_cam_to_world())
         angles = r.as_euler('xyz')
-        r = Rotation.from_euler('xyz', [angles[0]+np.pi, angles[1], angles[2]])
+        r = Rotation.from_euler('xyz', [angles[0] + np.pi, angles[1], angles[2]])
         quat_wxyz = quaternion_from_matrix(r.as_matrix())
         quat_str = ','.join([str(v) for v in quat_wxyz])
         pose_str = f"{idx},{pos_str},{quat_str}"
