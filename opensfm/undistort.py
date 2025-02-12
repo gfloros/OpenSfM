@@ -42,7 +42,7 @@ def undistort_reconstruction(
                 f"Not undistorting {shot.id} as it is missing from the dataset's input images."
             )
             continue
-        if shot.camera.projection_type == "perspective":
+        if shot.camera.projection_type in ["perspective", "simple_radial"]:
             urec.add_camera(perspective_camera_from_perspective(shot.camera))
             subshots = [get_shot_with_different_camera(urec, shot, image_format)]
         elif shot.camera.projection_type == "brown":
@@ -180,7 +180,7 @@ def undistort_image(
         return {}
 
     projection_type = shot.camera.projection_type
-    if projection_type in ["perspective", "brown", "fisheye", "fisheye_opencv", "fisheye62"]:
+    if projection_type in ["perspective", "brown", "fisheye", "fisheye_opencv", "fisheye62", "simple_radial"]:
         [undistorted_shot] = undistorted_shots
         new_camera = undistorted_shot.camera
         height, width = original.shape[:2]

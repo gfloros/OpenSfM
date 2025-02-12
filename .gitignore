@@ -13,6 +13,7 @@ launch.json
 /doc/build
 /dist
 /OpenSfM.egg-info
+/opensfm.egg-info
 .cache
 .pytest_cache
 eval

@@ -19,7 +19,7 @@ def run_dataset(data: DataSet, no_cameras: bool, no_points: bool, depthmaps, poi
     """
 
     reconstructions = data.load_reconstruction()
-    tracks_manager = data.load_tracks_manager()
+    tracks_manager = data.load_tracks_manager() if data.tracks_exists() else None
     no_cameras = no_cameras
     no_points = no_points
     point_num_views = point_num_views
