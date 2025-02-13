@@ -10,6 +10,7 @@ from . import (
     detect_features,
     export_bundler,
     export_colmap,
+    export_fast_dipole_sums,
     export_geocoords,
     export_openmvs,
     export_ply,
@@ -51,4 +52,5 @@ opensfm_commands = [
     extend_reconstruction,
     create_submodels,
     align_submodels,
+    export_fast_dipole_sums,
 ]
